@@ -5,6 +5,12 @@ from flask import Flask, render_template, request, url_for, redirect
 from urllib.parse import unquote
 from dotenv import load_dotenv
 
+load_dotenv()
+
+api_key = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=api_key)
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,8 +20,6 @@ def index():
 @app.route('/sobre-equipe')
 def sobre_equipe():
     return render_template('sobre.html')
-
-genai.configure(api_key="Your Gemini Api Key")
 
 @app.route('/gemini', methods=["GET", "POST"])
 def gemini():
